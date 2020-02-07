@@ -8,7 +8,7 @@ import json
 import os
 import sys
 
-paramsPath = 'config-api.json'
+paramsPath = 'api-config.json'
 
 # check arguments
 if len(sys.argv) < 3:
@@ -48,7 +48,7 @@ files.sort()
 i=0
 for fpath in files:
     fname = os.path.basename(fpath)
-    dataItem = {"o:ingester": "upload", "file_index": str(i), "o:item": {"o:id": itemID}}
+    dataItem = {"o:ingester": "upload", "file_index": str(i), "o:item": {"o:id": itemID}, "dcterms:title":[ { "property_id":1, "property_label":"Title", "@value": fname, "type":"literal" } ] }
     mediaName = ('file['+str(i)+']', (fname, open(fpath, 'rb'), 'image/jpg'))
     mediaUpload = [ ('data', (None, json.dumps(dataItem), 'application/json')) ]
     mediaUpload.append(mediaName)
