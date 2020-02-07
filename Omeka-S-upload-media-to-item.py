@@ -8,7 +8,7 @@ import json
 import os
 import sys
 
-paramsPath = 'config-api.json'
+paramsPath = 'config.json'
 
 # check arguments
 if len(sys.argv) < 3:
