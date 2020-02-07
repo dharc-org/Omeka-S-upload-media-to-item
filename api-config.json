@@ -1,0 +1,5 @@
+{
+    "apiLink": "http://localhost/omeka-s/api/media",
+    "key_identity": "key-identity-from-admin-user-section",
+    "key_credential": "key-credentials-from-admin-user-section"
+}
