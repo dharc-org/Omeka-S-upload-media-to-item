@@ -11,7 +11,7 @@ import sys
 paramsPath = 'config.json'
 
 # check arguments
-if len(sys.argv) < 3:
+if len(sys.argv) < 4:
     print("No parameter has been include")
     print(" 1) path of images files - i.e. images/data")
     print(" 2) an extension - i.e. .jpg")
@@ -48,7 +48,8 @@ files.sort()
 i=0
 for fpath in files:
     fname = os.path.basename(fpath)
-    dataItem = {"o:ingester": "upload", "file_index": str(i), "o:item": {"o:id": itemID}, "dcterms:title":[ { "property_id":1, "property_label":"Title", "@value": fname, "type":"literal" } ] }
+    dataItem = {"o:ingester": "upload", "file_index": str(i), "o:item": {"o:id": itemID}, 
+    "dcterms:title":[ { "property_id":1, "property_label":"Title", "@value": fname, "type":"literal" } ] }
     mediaName = ('file['+str(i)+']', (fname, open(fpath, 'rb'), 'image/jpg'))
     mediaUpload = [ ('data', (None, json.dumps(dataItem), 'application/json')) ]
     mediaUpload.append(mediaName)
