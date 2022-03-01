@@ -7,25 +7,29 @@ import requests
 import json
 import os
 import sys
+import urllib3
 
-paramsPath = 'config.json'
+# disable error message for invalid auto generated certificates
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # check arguments
-if len(sys.argv) < 4:
-    print("No parameter has been include")
-    print(" 1) path of images files - i.e. images/data")
+if len(sys.argv) < 5:
+    print("Include the following parameters")
+    print(" 1) config .json file with credentials")
     print(" 2) an extension - i.e. .jpg")
-    print(" 3) an item ID code - i.e. 657")
-    print("i.e. $ python3 omeka-s_create-apiData-from-media.py repo/images .jpg 627")
+    print(" 3) path of images files - i.e. images/data")
+    print(" 4) an item ID code - i.e. 657")
+    print("i.e. $ python3 omeka-s_create-apiData-from-media.py config.json .jpg /media/images_jpg/ 627")
     sys.exit()
 
 # get var from arguments
-pathImg = sys.argv[1]
+confJson = sys.argv[1]
 extImg = sys.argv[2]
-itemID = sys.argv[3]
+pathImg = sys.argv[3]
+itemID = sys.argv[4]
 
 # set params
-paramsJson = json.loads(open(paramsPath, 'rb').read())
+paramsJson = json.loads(open(confJson, 'rb').read())
 apiLink = paramsJson['apiLink']
 params = {
     'key_identity': paramsJson['key_identity'],
@@ -53,8 +57,8 @@ for fpath in files:
     mediaName = ('file['+str(i)+']', (fname, open(fpath, 'rb'), 'image/jpg'))
     mediaUpload = [ ('data', (None, json.dumps(dataItem), 'application/json')) ]
     mediaUpload.append(mediaName)
-    response = requests.post(apiLink, params=params, files=mediaUpload)
-    print(mediaName, end =": ")
+    response = requests.post(apiLink, params=params, files=mediaUpload, verify=False)
+    print(fname, end =": ")
     print(response)
     i+=1
 
