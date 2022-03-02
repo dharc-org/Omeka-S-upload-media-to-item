@@ -58,8 +58,9 @@ for fpath in files:
     mediaUpload = [ ('data', (None, json.dumps(dataItem), 'application/json')) ]
     mediaUpload.append(mediaName)
     response = requests.post(apiLink, params=params, files=mediaUpload, verify=False)
-    print(fname, end =": ")
-    print(response)
+    print(response, end =" -> ")
+    print(fname)
     i+=1
 
+print("Config: "+confJson+" | Folder: "+pathImg)
 print("Uploaded "+str(i)+" media to item "+str(itemID))
