@@ -48,6 +48,8 @@ for r, d, f in os.walk(pathImg):
     break # only current directory and not subdirs
 files.sort()
 
+print("Start: upload media to item "+str(itemID)+" | Config: "+confJson+" | Folder: "+pathImg)
+
 # loop every media and upload via post request
 i=0
 for fpath in files:
@@ -58,9 +60,9 @@ for fpath in files:
     mediaUpload = [ ('data', (None, json.dumps(dataItem), 'application/json')) ]
     mediaUpload.append(mediaName)
     response = requests.post(apiLink, params=params, files=mediaUpload, verify=False)
+    print(str(i+1), end =". ")
     print(response, end =" -> ")
     print(fname)
     i+=1
 
-print("Config: "+confJson+" | Folder: "+pathImg)
-print("Uploaded "+str(i)+" media to item "+str(itemID))
+print("Finish: uploaded "+str(i)+" media to item "+str(itemID)+" | Folder: "+pathImg+" | Config: "+confJson)
