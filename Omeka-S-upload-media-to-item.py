@@ -19,7 +19,7 @@ if len(sys.argv) < 5:
     print(" 2) an extension - i.e. .jpg")
     print(" 3) path of images files - i.e. images/data")
     print(" 4) an item ID code - i.e. 657")
-    print("i.e. $ python3 omeka-s_create-apiData-from-media.py config.json .jpg /media/images_jpg/ 627")
+    print("i.e. $ python3 Omeka-S-upload-media-to-item.py config.json .jpg /media/images_jpg/ 627")
     sys.exit()
 
 # get var from arguments
